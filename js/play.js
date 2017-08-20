@@ -38,12 +38,10 @@ $(function() {
     //初始化
     playLetter();
 
-    var keyList = {
-        c70: 'f'
-    }
-
     //事件绑定
+    var working = false;
     $(document).on('keydown', function(e) {
+        //按键范围检查
         var code = e.originalEvent.keyCode;
         if(code < 65 || code > 90) {
             if(code == 13) {
@@ -51,6 +49,13 @@ $(function() {
             }
             return;
         }
+        //播放状态检查
+        if (working) {
+            return;
+        } else {
+            working = true;
+        }
+        //执行操作
         var keyLetter = String.fromCharCode(code - 65 + 97);
         if(keyLetter == curLetter) {
             audioPlay('success');
@@ -69,6 +74,9 @@ $(function() {
                 $result.removeClass('error');
             }, 300);
         }
+        setTimeout(function(){
+            working = false;
+        }, 500);
     });
     $audioCtrl.on('click', function() {
         audioPlay(curLetter);
