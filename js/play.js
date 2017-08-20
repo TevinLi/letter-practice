@@ -44,7 +44,14 @@ $(function() {
 
     //事件绑定
     $(document).on('keydown', function(e) {
-        var keyLetter = String.fromCharCode(e.originalEvent.keyCode - 65 + 97);
+        var code = e.originalEvent.keyCode;
+        if(code < 65 || code > 90) {
+            if(code == 13) {
+                audioPlay(curLetter);
+            }
+            return;
+        }
+        var keyLetter = String.fromCharCode(code - 65 + 97);
         if(keyLetter == curLetter) {
             audioPlay('success');
             $result.addClass('success');
@@ -62,6 +69,9 @@ $(function() {
                 $result.removeClass('error');
             }, 300);
         }
+    });
+    $audioCtrl.on('click', function() {
+        audioPlay(curLetter);
     });
 
 });
