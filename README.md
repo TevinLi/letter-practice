@@ -23,3 +23,7 @@
 
 **阶段三**：  
 如果需要，可以一直练习到可以盲打
+
+
+## Demo
+[字母练习在线示范>>](http://tevinli.github.io/letter-practice/)
