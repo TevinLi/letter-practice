@@ -118,3 +118,27 @@
     color: #00cc00;
     font-weight: bold;
 }
+
+
+@media screen and (min-height: 700px) {
+	.letter-outer {
+	    top: 40%;
+	}
+    .letter-top {
+        top: -70px;
+    }
+    .letter-top span {
+        padding: 0 180px;
+        font-size: 40px;
+    }
+    .letter-voice {
+        top: auto;
+        bottom: -150px;
+        left: 50px;
+    }
+    .letter-results {
+        top: auto;
+        bottom: -185px;
+        right: 50px;
+    }
+}
