@@ -5,9 +5,34 @@
     width: 100%;
     height: 100%;
 }
+/* 模式 */
+.letter-mod {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    z-index: 10;
+    width: 1000px;
+    padding: 0 10px;
+    font-size: 16px;
+    line-height: 30px;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+.letter-mod label {
+    display: inline-block;
+}
+.letter-mod label:active {
+    background: #eee;
+}
+.letter-mod input {
+    vertical-align: middle;
+}
+/* 字母 */ 
 .letter-outer {
     position: absolute;
-    top: 48%;
+    top: 50%;
     left: 50%;
     width: 1000px;
     text-align: center;
@@ -77,8 +102,7 @@
 .letter-box:nth-child(2) span:nth-child(2) {
     margin-top: 6px;
 }
-
-
+/* 界面 */
 .letter-top {
     position: absolute;
     top: -78px;
@@ -92,7 +116,7 @@
 }
 .letter-voice {
     position: absolute;
-    top: -80px;
+    top: -86px;
     left: 20px;
     cursor: pointer;
 }
@@ -118,8 +142,23 @@
     color: #00cc00;
     font-weight: bold;
 }
+.letter-speed {
+    position: absolute;
+    top: -86px;
+    left: 50%;
+    width: 75px;
+    height: 75px;
+    margin-left: -42px;
+    line-height: 80px;
+    font-size: 35px;
+    color: rgb(200,200,200);
+    text-align:center;
+    border: #ddd 2px solid;
+    border-radius: 5px;
+    background: #f8f8f8;
+}
 
-
+/* ---------- big screen ---------- */
 @media screen and (min-height: 700px) {
 	.letter-outer {
 	    top: 40%;
@@ -140,5 +179,9 @@
         top: auto;
         bottom: -185px;
         right: 50px;
+    }
+    .letter-speed {
+        top: auto;
+        bottom: -150px;
     }
 }

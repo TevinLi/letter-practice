@@ -10,6 +10,9 @@
 
     <body>
         <div class="main">
+            <div class="letter-mod" style="display: none;">
+                <label><input type="checkbox"> 听力模式</label>
+            </div>
             <div class="letter-outer">
                 <div class="letter-top">
                     <span>印刷体</span>
@@ -32,7 +35,8 @@
                     </div>
                 </div>
                 <div class="letter-ctrl">
-                    <div class="letter-voice"><img id="audioCtrl" src="img/audio.png"/></div>
+                    <div class="letter-voice"><img id="audioCtrl" src="img/audio.png" /></div>
+                    <div class="letter-speed"><b id="speed">0</b></div>
                     <div class="letter-results" id="result">
                         <i>&times;</i>
                         <i>&radic;</i>
@@ -41,6 +45,7 @@
             </div>
         </div>
         <script src="js/jquery-3.2.1.min.js"></script>
+        <script src="js/speed.js"></script>
         <script src="js/play.js"></script>
     </body>
 

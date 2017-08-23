@@ -19,6 +19,9 @@ $(function() {
         audio.play();
     };
 
+    //速度显示
+    var speed = new Speed();
+
     //选取随机字母
     var getLetter = function() {
         var code = parseInt(Math.random() * 26) + 97;
@@ -30,12 +33,10 @@ $(function() {
         $uppercase.text(curLetter.toUpperCase());
         $lowercase.text(curLetter);
         audioPlay(curLetter);
-    }
-
-    //当前字母
-    var curLetter = getLetter();
+    };
 
     //初始化
+    var curLetter = getLetter();
     playLetter();
 
     //事件绑定
@@ -60,13 +61,14 @@ $(function() {
         if(keyLetter == curLetter) {
             audioPlay('success');
             $result.addClass('success');
+            speed.nock();
             setTimeout(function() {
                 $result.removeClass('success');
             }, 300);
             setTimeout(function() {
                 curLetter = getLetter();
                 playLetter();
-            }, 500);
+            }, 400);
         } else {
             audioPlay('error');
             $result.addClass('error');
@@ -76,7 +78,7 @@ $(function() {
         }
         setTimeout(function(){
             working = false;
-        }, 500);
+        }, 400);
     });
     $audioCtrl.on('click', function() {
         audioPlay(curLetter);
