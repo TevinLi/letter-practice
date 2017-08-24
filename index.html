@@ -9,9 +9,9 @@
     </head>
 
     <body>
-        <div class="main">
-            <div class="letter-mod" style="display: none;">
-                <label><input type="checkbox"> 听力模式</label>
+        <div class="main" onselectstart="return false">
+            <div class="letter-mod">
+                <label><input type="checkbox" id="mod"><i></i> <span>听力模式</span></label>
             </div>
             <div class="letter-outer">
                 <div class="letter-top">
@@ -24,7 +24,7 @@
                     <i></i>
                     <i></i>
                 </div>
-                <div class="letter-letter">
+                <div class="letter-letter" id="letter">
                     <div class="letter-box">
                         <span class="uppercase"></span>
                         <span class="lowercase"></span>
@@ -33,6 +33,7 @@
                         <span class="uppercase"></span>
                         <span class="lowercase"></span>
                     </div>
+                    <div class="letter-ear"><img src="img/ear.png"/></div>
                 </div>
                 <div class="letter-ctrl">
                     <div class="letter-voice"><img id="audioCtrl" src="img/audio.png" /></div>

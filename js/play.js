@@ -7,7 +7,24 @@ $(function() {
     var $uppercase = $('.uppercase'),
         $lowercase = $('.lowercase'),
         $audioCtrl = $('#audioCtrl'),
-        $result = $('#result');
+        $result = $('#result'),
+        $mod = $('#mod'),
+        $letter = $('#letter');
+        
+    //听力模式
+    if (sessionStorage['letter-practice-mod'] == 'listen') {
+        $letter.addClass('off');
+        $mod.prop('checked', true);
+    }
+    $mod.on('change', function() {
+        if ($(this).is(':checked')) {
+            sessionStorage['letter-practice-mod'] = 'listen';
+            $letter.addClass('off');
+        } else {
+            sessionStorage['letter-practice-mod'] = 'normal';
+            $letter.removeClass('off');
+        }
+    });
 
     //播放音乐
     var audio = null;

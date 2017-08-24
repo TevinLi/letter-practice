@@ -4,6 +4,9 @@
 .main {
     width: 100%;
     height: 100%;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    user-select:none;
 }
 /* 模式 */
 .letter-mod {
@@ -13,8 +16,8 @@
     z-index: 10;
     width: 1000px;
     padding: 0 10px;
-    font-size: 16px;
-    line-height: 30px;
+    font-size: 20px;
+    line-height: 50px;
     -webkit-transform: translateX(-50%);
     -moz-transform: translateX(-50%);
     -ms-transform: translateX(-50%);
@@ -22,12 +25,38 @@
 }
 .letter-mod label {
     display: inline-block;
+    padding: 0 20px;
+    cursor: pointer;
 }
 .letter-mod label:active {
     background: #eee;
 }
-.letter-mod input {
+.letter-mod i,
+.letter-mod span {
     vertical-align: middle;
+}
+.letter-mod input {
+    display: none;
+}
+.letter-mod input + i {
+    display: inline-block;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    border: #ccc 1px solid;
+}
+.letter-mod input:checked + i:after {
+    position: absolute;
+    top: -5px;
+    left: 0;
+    width: 18px;
+    text-align: center;
+    line-height: 20px;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: bold;
+    color: #32D214;
+    content: "√";
 }
 /* 字母 */ 
 .letter-outer {
@@ -65,6 +94,9 @@
 .letter-format i:nth-child(4) {
     top: 300px;
 }
+.letter-letter.off .letter-box {
+    visibility: hidden;
+}
 .letter-box {
     display: inline-block;
     position: relative;
@@ -101,6 +133,19 @@
 }
 .letter-box:nth-child(2) span:nth-child(2) {
     margin-top: 6px;
+}
+.letter-ear {
+    display: none;
+    position: absolute;
+    top: 35px;
+    left: 320px;
+    z-index: 10;
+}
+.letter-ear img {
+    width: 350px;
+}
+.letter-letter.off .letter-ear {
+    display: block;
 }
 /* 界面 */
 .letter-top {
@@ -149,7 +194,7 @@
     width: 75px;
     height: 75px;
     margin-left: -42px;
-    line-height: 80px;
+    line-height: 75px;
     font-size: 35px;
     color: rgb(200,200,200);
     text-align:center;
