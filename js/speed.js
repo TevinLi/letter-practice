@@ -5,12 +5,13 @@
 (function (win) {
 
     var Speed = win.Speed = function () {
-        this._data = {
+        win.speedData = this._data = {
             minuId: -1,
             team: [],
             speed: 0.0,
             speedText: 0,
-            color: 'rgb(200,200,200)'
+            color: 'rgb(200,200,200)',
+            minuCount: 0
         };
         this._init();
     };
@@ -23,15 +24,22 @@
         this._run();
     };
 
-    Speed.prototype._preMinu = function () {
+    Speed.prototype._insMinu = function (num) {
         this._data.team.pop();
+        if (num > 3) {
+            this._data.team.pop();
+        }
+        if (num > 5) {
+            this._data.team.pop();
+        }
+        this._data.minuCount++;
         this._minu();
     };
     Speed.prototype._minu = function () {
         var that = this;
         clearTimeout(this._data.minuId);
         this._data.minuId = setTimeout(function () {
-            that._preMinu();
+            that._insMinu();
         }, 3000);
     };
 
@@ -43,10 +51,11 @@
         if (this._data.team.length > 15) {
             this._data.team.shift();
         }
+        this._data.minuCount = 0;
         this._minu();
     };
 
-    Speed.prototype._getSpeed = function() {
+    Speed.prototype._getSpeed = function () {
         var now = Date.now();
         //基于列队第一个计算
         var duration1 = (now - this._data.team[0]) / 1000;
@@ -59,12 +68,9 @@
         var speed2 = 60 / average2;
         //平均
         this._data.speed = (speed1 + speed2) / 2 + 5;
-        //显示数值
-        this._data.speedText = parseInt(this._data.speed * 1.85);
-        this._data.speedText = this._data.speedText > 100 ? 100 : this._data.speedText;
-    }
+    };
 
-    Speed.prototype._getColor = function() {
+    Speed.prototype._getColor = function () {
         var speed2 = this._data.speed > 60 ? 60 : this._data.speed;
         //范围 80 ~ 200
         var colorR = parseInt(Math.pow((-2 * speed2 + 200), 1.5) * 0.13);
@@ -79,7 +85,18 @@
         colorG = colorG > 210 ? 210 : colorG;
         colorB = colorB > 200 ? 200 : colorB;
         this._data.color = 'rgb(' + colorR + ',' + colorG + ',' + colorB + ')';
-    }
+    };
+
+    Speed.prototype._getOutput = function () {
+        //显示数值
+        var realNum = parseInt(this._data.speed * 1.85);
+        if (this._data.speedText > realNum) {
+            this._data.speedText--;
+        } else if (this._data.speedText < realNum) {
+            this._data.speedText++;
+        }
+        this._data.speedText = this._data.speedText > 100 ? 100 : this._data.speedText;
+    };
 
     Speed.prototype._update = function () {
         if (this._data.team.length <= 3) {
@@ -89,6 +106,7 @@
             this._getSpeed();
             this._getColor();
         }
+        this._getOutput();
     };
 
     Speed.prototype._render = function () {
@@ -102,7 +120,7 @@
         this._timer = setInterval(function () {
             that._update();
             that._render();
-        }, 1000);
+        }, 100);
     };
 
 })(window);
