@@ -85,7 +85,7 @@ $(function() {
             setTimeout(function() {
                 curLetter = getLetter();
                 playLetter();
-            }, 400);
+            }, 450);
         } else {
             audioPlay('error');
             $result.addClass('error');
@@ -95,7 +95,7 @@ $(function() {
         }
         setTimeout(function(){
             working = false;
-        }, 400);
+        }, 450);
     });
     $audioCtrl.on('click', function() {
         audioPlay(curLetter);
