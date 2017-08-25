@@ -61,7 +61,7 @@
 /* 字母 */ 
 .letter-outer {
     position: absolute;
-    top: 50%;
+    top: 55%;
     left: 50%;
     width: 1000px;
     text-align: center;
@@ -201,12 +201,28 @@
     border: #ddd 2px solid;
     border-radius: 5px;
     background: #f8f8f8;
+    box-shadow: inset rgba(0,0,0,.1) 0 1px 5px;
+}
+.letter-speed.ful,
+.letter-speed.full {
+    border-color: rgb(80, 210, 0);
+    background: #fafafa;
+    box-shadow: rgb(80, 210, 0) 0 0 15px;
+    animation: flash-speed 2s linear infinite alternate;
+}
+@keyframes flash-speed {
+    0% {
+        box-shadow: rgb(100, 210, 0) 0 0 0;
+    }
+    100% {
+        box-shadow: rgb(80, 210, 0) 0 0 25px;
+    }
 }
 
 /* ---------- big screen ---------- */
 @media screen and (min-height: 700px) {
 	.letter-outer {
-	    top: 40%;
+	    top: 43%;
 	}
     .letter-top {
         top: -70px;

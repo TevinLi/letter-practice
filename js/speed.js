@@ -5,7 +5,7 @@
 (function (win) {
 
     var Speed = win.Speed = function () {
-        win.speedData = this._data = {
+        this._data = {
             minuId: -1,
             team: [],
             speed: 0.0,
@@ -21,16 +21,24 @@
         this.$e = {
             speed: $('#speed')
         };
+        this.$e.speedParent = this.$e.speed.parent();
         this._run();
     };
 
     Speed.prototype._insMinu = function (num) {
-        this._data.team.pop();
-        if (num > 3) {
+        var that = this;
+        if (this._data.team.length > 0) {
             this._data.team.pop();
-        }
-        if (num > 5) {
-            this._data.team.pop();
+            if (num > 3) {
+                setTimeout(function () {
+                    that._data.team.pop();
+                }, 500);
+            }
+            if (num > 5) {
+                setTimeout(function () {
+                    that._data.team.pop();
+                }, 1000);
+            }
         }
         this._data.minuCount++;
         this._minu();
@@ -70,8 +78,19 @@
         this._data.speed = (speed1 + speed2) / 2 + 5;
     };
 
+    Speed.prototype._getSpeedOut = function () {
+        //显示数值
+        var realNum = parseInt(this._data.speed * 1.85);
+        if (this._data.speedText > realNum) {
+            this._data.speedText--;
+        } else if (this._data.speedText < realNum) {
+            this._data.speedText++;
+        }
+        this._data.speedText = this._data.speedText > 100 ? 100 : this._data.speedText;
+    };
+
     Speed.prototype._getColor = function () {
-        var speed2 = this._data.speed > 60 ? 60 : this._data.speed;
+        var speed2 = this._data.speedText / 1.85;
         //范围 80 ~ 200
         var colorR = parseInt(Math.pow((-2 * speed2 + 200), 1.5) * 0.13);
         //范围 200 ~ 210
@@ -87,32 +106,25 @@
         this._data.color = 'rgb(' + colorR + ',' + colorG + ',' + colorB + ')';
     };
 
-    Speed.prototype._getOutput = function () {
-        //显示数值
-        var realNum = parseInt(this._data.speed * 1.85);
-        if (this._data.speedText > realNum) {
-            this._data.speedText--;
-        } else if (this._data.speedText < realNum) {
-            this._data.speedText++;
-        }
-        this._data.speedText = this._data.speedText > 100 ? 100 : this._data.speedText;
-    };
-
     Speed.prototype._update = function () {
         if (this._data.team.length <= 3) {
             this._data.speed = 0;
-            this._data.color = 'rgb(200,200,200)';
         } else {
             this._getSpeed();
-            this._getColor();
         }
-        this._getOutput();
+        this._getSpeedOut();
+        this._getColor();
     };
 
     Speed.prototype._render = function () {
         this.$e.speed
             .text(this._data.speedText)
             .css('color', this._data.color);
+        if (this._data.speedText == 100) {
+            this.$e.speedParent.addClass('full');
+        } else {
+            this.$e.speedParent.removeClass('full');
+        }
     };
 
     Speed.prototype._run = function () {
